@@ -26,6 +26,7 @@ html {
 body {
   font-family: "Rubik", sans-serif;
   background-color: #eaecf1;
+  position: relative;
 }
 
 .container {
@@ -68,6 +69,7 @@ body {
 .plus__icon,
 .minus__icon {
   width: 1.5rem;
+  cursor: pointer;
   /* height: 2rem; */
 }
 .number {
@@ -105,6 +107,7 @@ body {
   align-items: center;
   gap: 0.7rem;
   margin-left: auto;
+  cursor: pointer;
 }
 
 .reply__text {
@@ -117,7 +120,8 @@ body {
   line-height: 1.4;
 }
 
-.reply__box {
+.reply__box,
+.user__reply__box {
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -144,14 +148,24 @@ body {
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  cursor: pointer;
 }
 .delete__text {
   color: #ed6468;
   font-size: 1.2rem;
 }
 .edit__text {
-  color: #5457b6;
   font-size: 1.2rem;
+}
+.replied__to {
+  font-size: 1.4rem;
+  color: #5457b6;
+  font-weight: 600;
+}
+
+.user__reply {
+  display: flex;
+  /* align-items: center; */
 }
 
 .writing__section {
@@ -180,4 +194,88 @@ body {
   border-radius: 0.5rem;
   text-transform: uppercase;
   font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.writing__section {
+  /* display: none; */
+}
+
+.delete__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  width: 35rem;
+  padding: 2.2rem;
+  background-color: #fff;
+  z-index: 4;
+  border-radius: 1rem;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s;
+}
+.delete-text {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #324152;
+}
+.confirm-text {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: #67727e;
+}
+.confrim__box {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1rem;
+}
+.no-box,
+.yes-box {
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 1.4rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+.no-box {
+  background-color: #324152;
+}
+.yes-box {
+  background-color: #ed6468;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* backdrop-filter: blur(3px); */
+
+  /* display: none; */
+  z-index: 3;
+}
+
+.delete__container,
+.overlay {
+  display: none;
+}
+
+.reply__input-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: #fff;
+  display: none;
+}
+
+.replying__img {
+  width: 4rem;
 }
