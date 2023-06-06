@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Frontend Mentor | Interactive comments section</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <main class="main">
+        <section class="comment__section">
+          <div class="comment__box">
+            <div class="number__box">
+              <img
+                src="images/icon-plus.svg"
+                alt="plus icon"
+                class="plus__icon"
+              />
+              <p class="number">12</p>
+              <img
+                src="images/icon-minus.svg"
+                alt="minus icon"
+                class="minus__icon"
+              />
+            </div>
+            <div class="text__box">
+              <div class="text__header__box">
+                <img
+                  src="images/avatars/image-amyrobson.webp"
+                  alt="image-amyrobson"
+                  class="user__img"
+                />
+                <p class="user__name">amyrobson</p>
+                <p class="date__posted">1 month ago</p>
+                <div class="reply__text__box">
+                  <img
+                    src="images/icon-reply.svg"
+                    alt="reply img"
+                    class="reply__img"
+                  />
+                  <p class="reply__text">Reply</p>
+                </div>
+              </div>
+              <p class="user__text">
+                Impressive! Though it seems the drag feature could be improved.
+                But overall it looks incredible. You've nailed the design and
+                the responsiveness at various breakpoints works very well
+              </p>
+            </div>
+          </div>
+          <div class="reply__box">
+            <div class="number__box">
+              <img
+                src="images/icon-plus.svg"
+                alt="plus icon"
+                class="plus__icon"
+              />
+              <p class="number">4</p>
+              <img
+                src="images/icon-minus.svg"
+                alt="minus icon"
+                class="minus__icon"
+              />
+            </div>
+            <div class="text__box">
+              <div class="text__header__box">
+                <img
+                  src="images/avatars/image-juliusomo.webp"
+                  alt="image-juliusomo"
+                  class="user__img"
+                />
+                <p class="user__name">juliusomo</p>
+                <p class="you">you</p>
+                <p class="date__posted">2 days ago</p>
+                <div class="edit__delete__box">
+                  <div class="delete__box">
+                    <img
+                      src="images/icon-delete.svg"
+                      alt="delete img"
+                      class="delete__img"
+                    />
+                    <p class="delete__text">Delete</p>
+                  </div>
+                  <div class="edit__box">
+                    <img
+                      src="images/icon-edit.svg"
+                      alt="edit img"
+                      class="edit__img"
+                    />
+                    <p class="edit__text">Edit</p>
+                  </div>
+                </div>
+              </div>
+              <p class="user__text">
+                Impressive! Though it seems the drag feature could be improved.
+                But overall it looks incredible. You've nailed the design and
+                the responsiveness at various breakpoints works very well
+              </p>
+            </div>
+          </div>
+          <div class="reply__box">
+            <div class="number__box">
+              <img
+                src="images/icon-plus.svg"
+                alt="plus icon"
+                class="plus__icon"
+              />
+              <p class="number">4</p>
+              <img
+                src="images/icon-minus.svg"
+                alt="minus icon"
+                class="minus__icon"
+              />
+            </div>
+            <div class="text__box">
+              <div class="text__header__box">
+                <img
+                  src="images/avatars/image-juliusomo.webp"
+                  alt="image-juliusomo"
+                  class="user__img"
+                />
+                <p class="user__name">juliusomo</p>
+                <p class="you">you</p>
+                <p class="date__posted">2 days ago</p>
+                <div class="edit__delete__box">
+                  <div class="delete__box">
+                    <img
+                      src="images/icon-delete.svg"
+                      alt="delete img"
+                      class="delete__img"
+                    />
+                    <p class="delete__text">Delete</p>
+                  </div>
+                  <div class="edit__box">
+                    <img
+                      src="images/icon-edit.svg"
+                      alt="edit img"
+                      class="edit__img"
+                    />
+                    <p class="edit__text">Edit</p>
+                  </div>
+                </div>
+              </div>
+              <p class="user__text">
+                Impressive! Though it seems the drag feature could be improved.
+                But overall it looks incredible. You've nailed the design and
+                the responsiveness at various breakpoints works very well
+              </p>
+            </div>
+          </div>
+        </section>
+        <section class="writing__section">
+          <img
+            src="images/avatars/image-juliusomo.webp"
+            alt="writing img"
+            class="writing__img"
+          />
+          <textarea
+            class="input__text"
+            name=""
+            id=""
+            cols="50"
+            rows="4"
+            placeholder="Add a comment..."
+          ></textarea>
+          <p class="send">Send</p>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
