@@ -256,6 +256,8 @@ const page = async function () {
           console.log(replyInput.value);
           renderYou(replyInput.value);
           replyInput.textContent = `@${userName}`;
+          replyInput.value = `@${userName}`;
+          replyBox.style.display = "none";
         }
       });
       writingSection.addEventListener("click", function (e) {
