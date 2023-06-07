@@ -219,10 +219,10 @@ const renderYou = function (data) {
     </p>
   </div>
 </div>`;
-  const commentBox = document.querySelectorAll(".comment__box");
+  const commentBox = document.querySelector(".comment__box");
 
-  // commentBox.insertAdjacentHTML("afterend", html);
-  commentBox.forEach((comment) => comment.insertAdjacentHTML("afterend", html));
+  commentBox.insertAdjacentHTML("afterend", html);
+  // commentBox.forEach((comment) => comment.insertAdjacentHTML("afterend", html));
 };
 
 const page = async function () {
