@@ -219,10 +219,15 @@ const renderYou = function (data) {
     </p>
   </div>
 </div>`;
-  const commentBox = document.querySelector(".comment__box");
 
-  commentBox.insertAdjacentHTML("afterend", html);
+  // const commentBox = document.querySelectorAll(".comment__box");
+
+  // // commentBox.insertAdjacentHTML("afterend", html);
   // commentBox.forEach((comment) => comment.insertAdjacentHTML("afterend", html));
+  const replyBox = document.querySelector(".reply__input-box");
+  const replys = replyBox.previousElementSibling;
+
+  replys.insertAdjacentHTML("afterend", html);
 };
 
 const page = async function () {
@@ -235,31 +240,35 @@ const page = async function () {
   renderReply(data.comments[1].replies[0]);
   renderUserReply(data.comments[1].replies[1]);
   const replyComment = document.querySelectorAll(".reply__text__box");
-  const replyBox = document.querySelector(".reply__input-box");
   console.log(replyComment);
+
   replyComment.forEach((reply) => {
     reply.addEventListener("click", function (e) {
       // writingSection.style.display = "flex";
+      const replyBox = document.querySelector(".reply__input-box");
       const replys = reply.closest(".box");
 
       replyBox.style.display = "flex";
       const replyInput = document.querySelector(".reply__input");
-
+      console.log(replys);
       replys.insertAdjacentElement("afterend", replyBox);
       const userName = replys.querySelector(".user__name").textContent;
       replyInput.textContent = `@${userName}`;
       console.log(replyBox);
+
       replyBox.addEventListener("click", function (e) {
         if (e.target.closest(".send")) {
           const replyInput = document.querySelector(".reply__input");
 
+          // replyInput.textContent = `@${userName}`;
           console.log(replyInput.value);
           renderYou(replyInput.value);
-          replyInput.textContent = `@${userName}`;
           replyInput.value = `@${userName}`;
           replyBox.style.display = "none";
         }
       });
+
+      /////////////////////////
       writingSection.addEventListener("click", function (e) {
         console.log(e.target);
 
