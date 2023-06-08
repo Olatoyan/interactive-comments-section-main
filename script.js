@@ -171,7 +171,7 @@ const renderReply = function (data) {
 };
 
 const renderYou = function (data) {
-  const html = `<div class="user__reply__box">
+  const html = `<div class="reply__box">
   <div class="number__box">
     <img
       src="images/icon-plus.svg"
@@ -228,6 +228,72 @@ const renderYou = function (data) {
   const replys = replyBox.previousElementSibling;
 
   replys.insertAdjacentHTML("afterend", html);
+  const deleteBox = document.querySelectorAll(".delete__box");
+
+  deleteBox.forEach((del) => {
+    del.addEventListener("click", function (e) {
+      console.log("de");
+      deleteContainer.style.display = "flex";
+      overlay.style.display = "block";
+      const container = del.closest(".reply__box");
+      console.log(container);
+
+      const deleteContainerListener = function (e) {
+        if (e.target.closest(".no-box")) {
+          deleteContainer.style.display = "none";
+          overlay.style.display = "none";
+        } else if (e.target.closest(".yes-box")) {
+          container.remove();
+          deleteContainer.style.display = "none";
+          overlay.style.display = "none";
+        }
+      };
+
+      deleteContainer.addEventListener("click", deleteContainerListener);
+    });
+  });
+
+  // const deleteBox = document.querySelectorAll(".delete__box");
+  // deleteBox.forEach((del) => {
+  //   const replyB = del.closest(".reply__box");
+
+  //   del.addEventListener("click", function (e) {
+  //     console.log("de");
+  //     deleteContainer.style.display = "flex";
+  //     overlay.style.display = "block";
+  //   });
+
+  //   deleteContainer.addEventListener("click", function (e) {
+  //     if (e.target.closest(".no-box")) {
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     } else if (e.target.closest(".yes-box")) {
+  //       const container = del.closest(".reply__box");
+  //       container.remove();
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     }
+  //   });
+  // });
+  // deleteBox.forEach((del) => {
+  //   del.addEventListener("click", function (e) {
+  //     console.log("de");
+  //     deleteContainer.style.display = "flex";
+  //     overlay.style.display = "block";
+  //   });
+
+  //   deleteContainer.addEventListener("click", function (e) {
+  //     if (e.target.closest(".no-box")) {
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     } else if (e.target.closest(".yes-box")) {
+  //       const container = del.closest(".reply__box");
+  //       container.remove();
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     }
+  //   });
+  // });
 };
 
 const page = async function () {
@@ -255,7 +321,7 @@ const page = async function () {
       renderYou(replyInput.value);
       // replyInput.value = `@${userName}`;
       replyBox.style.display = "none";
-      // activeReplyBox.style.display = "none";
+      // activezzzz.style.display = "none";
       activeReplyBox = null;
       // replyBox.removeEventListener("click", handleReplySend); // Remove the event listener after sending the reply
     }
@@ -354,7 +420,6 @@ const page = async function () {
       }
     });
   });
-
   const deleteBox = document.querySelectorAll(".delete__box");
 
   deleteBox.forEach((del) => {
@@ -362,15 +427,65 @@ const page = async function () {
       console.log("de");
       deleteContainer.style.display = "flex";
       overlay.style.display = "block";
-    });
+      const container = del.closest(".reply__box");
+      console.log(container);
 
-    deleteContainer.addEventListener("click", function (e) {
-      if (e.target.closest(".no-box")) {
-        deleteContainer.style.display = "none";
-        overlay.style.display = "none";
-      }
+      const deleteContainerListener = function (e) {
+        if (e.target.closest(".no-box")) {
+          deleteContainer.style.display = "none";
+          overlay.style.display = "none";
+        } else if (e.target.closest(".yes-box")) {
+          container.remove();
+          deleteContainer.style.display = "none";
+          overlay.style.display = "none";
+        }
+      };
+
+      deleteContainer.addEventListener("click", deleteContainerListener);
     });
   });
+
+  // const deleteBox = document.querySelectorAll(".delete__box");
+  // // console.log(deleteBox);
+  // deleteBox.forEach((del) => {
+  //   del.addEventListener("click", function (e) {
+  //     console.log("de");
+  //     deleteContainer.style.display = "flex";
+  //     overlay.style.display = "block";
+  //     const container = del.closest(".reply__box");
+  //     console.log(container);
+
+  //     deleteContainer.addEventListener("click", function (e) {
+  //       if (e.target.closest(".no-box")) {
+  //         deleteContainer.style.display = "none";
+  //         overlay.style.display = "none";
+  //       } else if (e.target.closest(".yes-box")) {
+  //         container.remove();
+  //         deleteContainer.style.display = "none";
+  //         overlay.style.display = "none";
+  //       }
+  //     });
+  //   });
+  // });
+  // deleteBox.forEach((del) => {
+  //   del.addEventListener("click", function (e) {
+  //     console.log("de");
+  //     deleteContainer.style.display = "flex";
+  //     overlay.style.display = "block";
+  //   });
+
+  //   deleteContainer.addEventListener("click", function (e) {
+  //     if (e.target.closest(".no-box")) {
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     } else if (e.target.closest(".yes-box")) {
+  //       const container = del.closest(".reply__box");
+  //       container.remove();
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     }
+  //   });
+  // });
 };
 page();
 

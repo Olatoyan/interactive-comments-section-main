@@ -26,7 +26,7 @@ html {
 body {
   font-family: "Rubik", sans-serif;
   background-color: #eaecf1;
-  position: relative;
+  /* position: relative; */
 }
 
 .container {
@@ -40,6 +40,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  position: relative;
 }
 
 .comment__section {
@@ -201,6 +202,18 @@ body {
 .writing__section {
   /* display: none; */
 }
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* backdrop-filter: blur(3px); */
+
+  /* display: none; */
+  z-index: 3;
+}
 
 .delete__container {
   display: flex;
@@ -248,19 +261,6 @@ body {
 }
 .yes-box {
   background-color: #ed6468;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  /* backdrop-filter: blur(3px); */
-
-  /* display: none; */
-  z-index: 3;
 }
 
 .delete__container,
