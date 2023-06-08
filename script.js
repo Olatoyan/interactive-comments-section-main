@@ -171,14 +171,14 @@ const renderReply = function (data) {
 };
 
 const renderYou = function (data) {
-  const html = `<div class="reply__box">
+  const html = `<div class="user__reply__box">
   <div class="number__box">
     <img
       src="images/icon-plus.svg"
       alt="plus icon"
       class="plus__icon"
     />
-    <p class="number">4</p>
+    <p class="number">0</p>
     <img
       src="images/icon-minus.svg"
       alt="minus icon"
@@ -239,14 +239,34 @@ const page = async function () {
   renderComment(data.comments[1]);
   renderReply(data.comments[1].replies[0]);
   renderUserReply(data.comments[1].replies[1]);
+  // const replyComment = document.querySelectorAll(".reply__text__box");
+  // let activeReplyBox = null;
   const replyComment = document.querySelectorAll(".reply__text__box");
   console.log(replyComment);
+  let activeReplyBox = null;
+
+  const handleReplySend = function (e) {
+    if (e.target.closest(".send")) {
+      const replyInput = document.querySelector(".reply__input");
+      const replyBox = document.querySelector(".reply__input-box");
+
+      // const userName = reply.querySelector(".user__name").textContent;
+      console.log(replyInput.value);
+      renderYou(replyInput.value);
+      // replyInput.value = `@${userName}`;
+      replyBox.style.display = "none";
+      // activeReplyBox.style.display = "none";
+      activeReplyBox = null;
+      // replyBox.removeEventListener("click", handleReplySend); // Remove the event listener after sending the reply
+    }
+  };
 
   replyComment.forEach((reply) => {
     reply.addEventListener("click", function (e) {
       // writingSection.style.display = "flex";
       const replyBox = document.querySelector(".reply__input-box");
       const replys = reply.closest(".box");
+      activeReplyBox = replyBox;
 
       replyBox.style.display = "flex";
       const replyInput = document.querySelector(".reply__input");
@@ -254,19 +274,12 @@ const page = async function () {
       replys.insertAdjacentElement("afterend", replyBox);
       const userName = replys.querySelector(".user__name").textContent;
       replyInput.textContent = `@${userName}`;
+      replyInput.value = `@${userName}`;
       console.log(replyBox);
 
-      replyBox.addEventListener("click", function (e) {
-        if (e.target.closest(".send")) {
-          const replyInput = document.querySelector(".reply__input");
+      replyBox.removeEventListener("click", handleReplySend);
 
-          // replyInput.textContent = `@${userName}`;
-          console.log(replyInput.value);
-          renderYou(replyInput.value);
-          replyInput.value = `@${userName}`;
-          replyBox.style.display = "none";
-        }
-      });
+      replyBox.addEventListener("click", handleReplySend);
 
       /////////////////////////
       writingSection.addEventListener("click", function (e) {
@@ -278,6 +291,47 @@ const page = async function () {
       });
     });
   });
+
+  // const replyComment = document.querySelectorAll(".reply__text__box");
+  // let activeReplyBox = null;
+
+  // const handleReplySend = function (e) {
+  //   if (e.target.closest(".send")) {
+  //     const replyInput = document.querySelector(".reply__input");
+  //     const userName = activeReplyBox.querySelector(".user__name").textContent;
+  //     console.log(replyInput.value);
+  //     renderYou(replyInput.value);
+  //     replyInput.value = `@${userName}`;
+  //     // replyInput.style.display = "none";
+
+  //     activeReplyBox = null;
+  //     // replyBox.removeEventListener("click", handleReplySend); // Remove the event listener after sending the reply
+  //   }
+  // };
+
+  // replyComment.forEach((reply) => {
+  //   reply.addEventListener("click", function (e) {
+  //     const replys = reply.closest(".box");
+  //     const userName = replys.querySelector(".user__name").textContent;
+
+  //     if (activeReplyBox !== null && activeReplyBox !== replys) {
+  //       activeReplyBox.style.display = "none";
+  //       activeReplyBox = null;
+  //     }
+
+  //     if (activeReplyBox !== replys) {
+  //       const replyBox = document.querySelector(".reply__input-box");
+  //       activeReplyBox = replys;
+  //       replyBox.style.display = "flex";
+  //       const replyInput = document.querySelector(".reply__input");
+  //       replys.insertAdjacentElement("afterend", replyBox);
+  //       replyInput.textContent = `@${userName}`;
+
+  //       replyBox.removeEventListener("click", handleReplySend); // Remove previous event listener, if any
+  //       replyBox.addEventListener("click", handleReplySend);
+  //     }
+  //   });
+  // });
 
   const numberBox = document.querySelectorAll(".number__box");
 
