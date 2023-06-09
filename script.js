@@ -252,6 +252,59 @@ const renderYou = function (data) {
       deleteContainer.addEventListener("click", deleteContainerListener);
     });
   });
+  const replyComment = document.querySelectorAll(".reply__text__box");
+  console.log(replyComment);
+  let activeReplyBox = null;
+  const editBox = document.querySelectorAll(".edit__box");
+  const handleReplySend = function (e) {
+    const replyInput = document.querySelector(".reply__input");
+    console.log(replyInput);
+    const replyBox = document.querySelector(".reply__input-box");
+    console.log(replyBox);
+    const container = activeReplyBox.closest(".reply__box");
+    // console.log(container);
+    // const editedText = replyInput.value.trim();
+    // console.log(editedText);
+
+    // if (editedText !== "") {
+    //   const userText = container.querySelector(".user__text");
+    //   userText.textContent = editedText;
+    // }
+
+    // replyBox.style.display = "none";
+    // activeReplyBox = null;
+    if (container) {
+      const editedText = replyInput.value.trim();
+
+      if (editedText !== "") {
+        const userText = container.querySelector(".user__text");
+        userText.textContent = editedText;
+      }
+
+      replyBox.style.display = "none";
+      activeReplyBox = null;
+    }
+  };
+
+  editBox.forEach((edit) => {
+    edit.addEventListener("click", function (e) {
+      const container = edit.closest(".reply__box");
+      const text = container.querySelector(".user__text").textContent.trim();
+      console.log(text);
+      container.style.display = "none";
+
+      const replyBox = document.querySelector(".reply__input-box");
+      const replyInput = document.querySelector(".reply__input");
+
+      replyBox.style.display = "flex";
+      replyInput.value = text;
+
+      activeReplyBox = replyBox;
+
+      replyBox.removeEventListener("click", handleReplySend);
+      replyBox.addEventListener("click", handleReplySend);
+    });
+  });
 
   // const deleteBox = document.querySelectorAll(".delete__box");
   // deleteBox.forEach((del) => {
