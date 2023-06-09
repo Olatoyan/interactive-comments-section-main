@@ -171,6 +171,22 @@ const renderReply = function (data) {
 };
 
 const renderYou = function (data) {
+  const timestamp = new Date();
+  const timeDifference = Math.floor((Date.now() - timestamp) / 1000);
+  let timeText;
+  if (timeDifference < 60) {
+    timeText = "few seconds ago";
+  } else if (timeDifference < 3600) {
+    const minutes = Math.floor(timeDifference / 60);
+    timeText = `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
+  } else if (timeDifference < 86400) {
+    const hours = Math.floor(timeDifference / 3600);
+    timeText = `${hours} hour${hours !== 1 ? "s" : ""} ago`;
+  } else {
+    const days = Math.floor(timeDifference / 86400);
+    timeText = `${days} day${days !== 1 ? "s" : ""} ago`;
+  }
+
   const html = `<div class="reply__box">
   <div class="number__box">
     <img
@@ -194,7 +210,7 @@ const renderYou = function (data) {
       />
       <p class="user__name">juliusomo</p>
       <p class="you">you</p>
-      <p class="date__posted">2 days ago</p>
+      <p class="date__posted">${timeText}</p>
       <div class="edit__delete__box">
         <div class="delete__box">
           <img
@@ -303,6 +319,48 @@ const renderYou = function (data) {
 
       replyBox.removeEventListener("click", handleReplySend);
       replyBox.addEventListener("click", handleReplySend);
+    });
+  });
+  const numberBox = document.querySelectorAll(".number__box");
+
+  numberBox.forEach((box) => {
+    box.addEventListener("click", function (e) {
+      const previousSibling = e.target.previousElementSibling;
+      const nextSibling = e.target.nextElementSibling;
+
+      // console.log(e.target);
+      if (e.target.classList.contains("minus__icon")) {
+        // console.log(previousSibling.textContent--);
+        if (previousSibling.textContent === 0) {
+          previousSibling.textContent = 0;
+        } else if (previousSibling.textContent > 0) {
+          previousSibling.textContent--;
+        }
+      } else if (e.target.classList.contains("plus__icon")) {
+        console.log("plus");
+        nextSibling.textContent++;
+      }
+
+      // Get all the number boxes
+      console.log(box.closest(".box"));
+      const allBoxes = document.querySelectorAll(".comment__box");
+      console.log(allBoxes);
+      // Convert the node list to an array
+      const boxesArray = Array.from(allBoxes);
+
+      // Sort the boxes based on their text content (as numbers)
+      boxesArray.sort(
+        (a, b) =>
+          parseInt(b.querySelector(".number").textContent) -
+          parseInt(a.querySelector(".number").textContent)
+      );
+
+      // Remove all boxes from the parent element
+      const parentElement = box.parentNode;
+      allBoxes.forEach((box) => box.remove());
+
+      // Append the sorted boxes back to the parent element
+      boxesArray.forEach((box) => parentElement.appendChild(box));
     });
   });
 
@@ -541,7 +599,3 @@ const page = async function () {
   // });
 };
 page();
-
-numberBox;
-console.log(numberBox);
-// console.log(replyComment);
