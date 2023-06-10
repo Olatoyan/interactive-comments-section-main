@@ -435,14 +435,6 @@ const renderYous = function (data) {
           />
           <p class="delete__text">Delete</p>
         </div>
-        <div class="edit__box">
-          <img
-            src="images/icon-edit.svg"
-            alt="edit img"
-            class="edit__img"
-          />
-          <p class="edit__text">Edit</p>
-        </div>
       </div>
     </div>
     <p class="user__text">
