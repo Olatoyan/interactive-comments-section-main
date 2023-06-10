@@ -278,7 +278,7 @@ const renderYou = function (data) {
     const replyBox = document.querySelector(".reply__input-box");
     console.log(replyBox);
     const container = activeReplyBox.closest(".reply__box");
-    // console.log(container);
+    console.log(container);
     // const editedText = replyInput.value.trim();
     // console.log(editedText);
 
@@ -471,7 +471,7 @@ const renderYous = function (data) {
       console.log("de");
       deleteContainer.style.display = "flex";
       overlay.style.display = "block";
-      const container = del.closest(".reply__box");
+      const container = del.closest(".comment__box");
       console.log(container);
 
       const deleteContainerListener = function (e) {
@@ -498,7 +498,7 @@ const renderYous = function (data) {
     const replyBox = document.querySelector(".reply__input-box");
     console.log(replyBox);
     const container = activeReplyBox.closest(".reply__box");
-    // console.log(container);
+    console.log(container);
     // const editedText = replyInput.value.trim();
     // console.log(editedText);
 
@@ -519,21 +519,20 @@ const renderYous = function (data) {
 
       replyBox.style.display = "none";
       activeReplyBox = null;
+      writingSection.style.display = "flex";
     }
   };
-
   editBox.forEach((edit) => {
     edit.addEventListener("click", function (e) {
-      const container = edit.closest(".reply__box");
+      const container = edit.closest(".comment__box");
       const text = container.querySelector(".user__text").textContent.trim();
-      console.log(text);
-      container.style.display = "none";
 
       const replyBox = document.querySelector(".reply__input-box");
       const replyInput = document.querySelector(".reply__input");
-
-      replyBox.style.display = "flex";
+      replyBox.style.display = "flex"; // Show the input box
+      container.style.display = "none"; // Hide the container
       replyInput.value = text;
+      writingSection.style.display = "none";
 
       activeReplyBox = replyBox;
 
@@ -541,6 +540,54 @@ const renderYous = function (data) {
       replyBox.addEventListener("click", handleReplySend);
     });
   });
+
+  // editBox.forEach((edit) => {
+  //   edit.addEventListener("click", function (e) {
+  //     const container = edit.closest(".comment__box");
+  //     console.log(container);
+  //     const text = container.querySelector(".user__text").textContent.trim();
+  //     console.log(text);
+  //     container.style.display = "none";
+
+  //     const replyBox = document.querySelector(".reply__input-box");
+  //     const replyInput = document.querySelector(".reply__input");
+
+  //     replyBox.style.display = "flex";
+  //     replyInput.value = text;
+
+  //     activeReplyBox = replyBox;
+  //     const containerr = document.querySelector(".comment__box");
+
+  //     containerr.insertAdjacentHTML("beforebegin", html);
+  //     containerr.remove();
+  //     replyBox.removeEventListener("click", handleReplySend);
+  //     replyBox.addEventListener("click", handleReplySend);
+  //   });
+  // });
+
+  deleteBox.forEach((del) => {
+    del.addEventListener("click", function (e) {
+      console.log("de");
+      deleteContainer.style.display = "flex";
+      overlay.style.display = "block";
+      const container = del.closest(".comment__box");
+      console.log(container);
+
+      const deleteContainerListener = function (e) {
+        if (e.target.closest(".no-box")) {
+          deleteContainer.style.display = "none";
+          overlay.style.display = "none";
+        } else if (e.target.closest(".yes-box")) {
+          container.remove();
+          deleteContainer.style.display = "none";
+          overlay.style.display = "none";
+        }
+      };
+
+      deleteContainer.addEventListener("click", deleteContainerListener);
+    });
+  });
+
   const numberBox = document.querySelectorAll(".number__box");
 
   numberBox.forEach((box) => {
