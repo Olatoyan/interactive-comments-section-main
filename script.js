@@ -340,27 +340,226 @@ const renderYou = function (data) {
         console.log("plus");
         nextSibling.textContent++;
       }
+    });
+  });
 
-      // Get all the number boxes
-      console.log(box.closest(".box"));
-      const allBoxes = document.querySelectorAll(".comment__box");
-      console.log(allBoxes);
-      // Convert the node list to an array
-      const boxesArray = Array.from(allBoxes);
+  // const deleteBox = document.querySelectorAll(".delete__box");
+  // deleteBox.forEach((del) => {
+  //   const replyB = del.closest(".reply__box");
 
-      // Sort the boxes based on their text content (as numbers)
-      boxesArray.sort(
-        (a, b) =>
-          parseInt(b.querySelector(".number").textContent) -
-          parseInt(a.querySelector(".number").textContent)
-      );
+  //   del.addEventListener("click", function (e) {
+  //     console.log("de");
+  //     deleteContainer.style.display = "flex";
+  //     overlay.style.display = "block";
+  //   });
 
-      // Remove all boxes from the parent element
-      const parentElement = box.parentNode;
-      allBoxes.forEach((box) => box.remove());
+  //   deleteContainer.addEventListener("click", function (e) {
+  //     if (e.target.closest(".no-box")) {
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     } else if (e.target.closest(".yes-box")) {
+  //       const container = del.closest(".reply__box");
+  //       container.remove();
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     }
+  //   });
+  // });
+  // deleteBox.forEach((del) => {
+  //   del.addEventListener("click", function (e) {
+  //     console.log("de");
+  //     deleteContainer.style.display = "flex";
+  //     overlay.style.display = "block";
+  //   });
 
-      // Append the sorted boxes back to the parent element
-      boxesArray.forEach((box) => parentElement.appendChild(box));
+  //   deleteContainer.addEventListener("click", function (e) {
+  //     if (e.target.closest(".no-box")) {
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     } else if (e.target.closest(".yes-box")) {
+  //       const container = del.closest(".reply__box");
+  //       container.remove();
+  //       deleteContainer.style.display = "none";
+  //       overlay.style.display = "none";
+  //     }
+  //   });
+  // });
+};
+const renderYous = function (data) {
+  const timestamp = new Date();
+  const timeDifference = Math.floor((Date.now() - timestamp) / 1000);
+  let timeText;
+  if (timeDifference < 60) {
+    timeText = "few seconds ago";
+  } else if (timeDifference < 3600) {
+    const minutes = Math.floor(timeDifference / 60);
+    timeText = `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
+  } else if (timeDifference < 86400) {
+    const hours = Math.floor(timeDifference / 3600);
+    timeText = `${hours} hour${hours !== 1 ? "s" : ""} ago`;
+  } else {
+    const days = Math.floor(timeDifference / 86400);
+    timeText = `${days} day${days !== 1 ? "s" : ""} ago`;
+  }
+
+  const html = `<div class="comment__box box">
+  <div class="number__box">
+    <img
+      src="images/icon-plus.svg"
+      alt="plus icon"
+      class="plus__icon"
+    />
+    <p class="number">0</p>
+    <img
+      src="images/icon-minus.svg"
+      alt="minus icon"
+      class="minus__icon"
+    />
+  </div>
+  <div class="text__box">
+    <div class="text__header__box">
+      <img
+        src="images/avatars/image-juliusomo.webp"
+        alt="image-juliusomo"
+        class="user__img"
+      />
+      <p class="user__name">juliusomo</p>
+      <p class="you">you</p>
+      <p class="date__posted">${timeText}</p>
+      <div class="edit__delete__box">
+        <div class="delete__box">
+          <img
+            src="images/icon-delete.svg"
+            alt="delete img"
+            class="delete__img"
+          />
+          <p class="delete__text">Delete</p>
+        </div>
+        <div class="edit__box">
+          <img
+            src="images/icon-edit.svg"
+            alt="edit img"
+            class="edit__img"
+          />
+          <p class="edit__text">Edit</p>
+        </div>
+      </div>
+    </div>
+    <p class="user__text">
+   ${data}
+    </p>
+  </div>
+</div>`;
+
+  // const commentBox = document.querySelectorAll(".comment__box");
+
+  // // commentBox.insertAdjacentHTML("afterend", html);
+  // commentBox.forEach((comment) => comment.insertAdjacentHTML("afterend", html));
+  const replyBox = document.querySelector(".reply__input-box");
+  const replys = replyBox.previousElementSibling;
+  console.log(replys);
+
+  const writingSection = document.querySelector(".writing__section");
+
+  // Insert the rendered content before the writing section
+  writingSection.insertAdjacentHTML("beforebegin", html);
+  // replys.insertAdjacentHTML("beforebegin", html);
+  const deleteBox = document.querySelectorAll(".delete__box");
+
+  deleteBox.forEach((del) => {
+    del.addEventListener("click", function (e) {
+      console.log("de");
+      deleteContainer.style.display = "flex";
+      overlay.style.display = "block";
+      const container = del.closest(".reply__box");
+      console.log(container);
+
+      const deleteContainerListener = function (e) {
+        if (e.target.closest(".no-box")) {
+          deleteContainer.style.display = "none";
+          overlay.style.display = "none";
+        } else if (e.target.closest(".yes-box")) {
+          container.remove();
+          deleteContainer.style.display = "none";
+          overlay.style.display = "none";
+        }
+      };
+
+      deleteContainer.addEventListener("click", deleteContainerListener);
+    });
+  });
+  const replyComment = document.querySelectorAll(".reply__text__box");
+  console.log(replyComment);
+  let activeReplyBox = null;
+  const editBox = document.querySelectorAll(".edit__box");
+  const handleReplySend = function (e) {
+    const replyInput = document.querySelector(".reply__input");
+    console.log(replyInput);
+    const replyBox = document.querySelector(".reply__input-box");
+    console.log(replyBox);
+    const container = activeReplyBox.closest(".reply__box");
+    // console.log(container);
+    // const editedText = replyInput.value.trim();
+    // console.log(editedText);
+
+    // if (editedText !== "") {
+    //   const userText = container.querySelector(".user__text");
+    //   userText.textContent = editedText;
+    // }
+
+    // replyBox.style.display = "none";
+    // activeReplyBox = null;
+    if (container) {
+      const editedText = replyInput.value.trim();
+
+      if (editedText !== "") {
+        const userText = container.querySelector(".user__text");
+        userText.textContent = editedText;
+      }
+
+      replyBox.style.display = "none";
+      activeReplyBox = null;
+    }
+  };
+
+  editBox.forEach((edit) => {
+    edit.addEventListener("click", function (e) {
+      const container = edit.closest(".reply__box");
+      const text = container.querySelector(".user__text").textContent.trim();
+      console.log(text);
+      container.style.display = "none";
+
+      const replyBox = document.querySelector(".reply__input-box");
+      const replyInput = document.querySelector(".reply__input");
+
+      replyBox.style.display = "flex";
+      replyInput.value = text;
+
+      activeReplyBox = replyBox;
+
+      replyBox.removeEventListener("click", handleReplySend);
+      replyBox.addEventListener("click", handleReplySend);
+    });
+  });
+  const numberBox = document.querySelectorAll(".number__box");
+
+  numberBox.forEach((box) => {
+    box.addEventListener("click", function (e) {
+      const previousSibling = e.target.previousElementSibling;
+      const nextSibling = e.target.nextElementSibling;
+
+      // console.log(e.target);
+      if (e.target.classList.contains("minus__icon")) {
+        // console.log(previousSibling.textContent--);
+        if (previousSibling.textContent === 0) {
+          previousSibling.textContent = 0;
+        } else if (previousSibling.textContent > 0) {
+          previousSibling.textContent--;
+        }
+      } else if (e.target.classList.contains("plus__icon")) {
+        console.log("plus");
+        nextSibling.textContent++;
+      }
     });
   });
 
@@ -459,13 +658,6 @@ const page = async function () {
       replyBox.addEventListener("click", handleReplySend);
 
       /////////////////////////
-      writingSection.addEventListener("click", function (e) {
-        console.log(e.target);
-
-        if (e.target.closest(".send")) {
-          console.log(inputText.value);
-        }
-      });
     });
   });
 
@@ -556,46 +748,20 @@ const page = async function () {
     });
   });
 
-  // const deleteBox = document.querySelectorAll(".delete__box");
-  // // console.log(deleteBox);
-  // deleteBox.forEach((del) => {
-  //   del.addEventListener("click", function (e) {
-  //     console.log("de");
-  //     deleteContainer.style.display = "flex";
-  //     overlay.style.display = "block";
-  //     const container = del.closest(".reply__box");
-  //     console.log(container);
+  const writingSection = document.querySelector(".writing__section");
 
-  //     deleteContainer.addEventListener("click", function (e) {
-  //       if (e.target.closest(".no-box")) {
-  //         deleteContainer.style.display = "none";
-  //         overlay.style.display = "none";
-  //       } else if (e.target.closest(".yes-box")) {
-  //         container.remove();
-  //         deleteContainer.style.display = "none";
-  //         overlay.style.display = "none";
-  //       }
-  //     });
-  //   });
-  // });
-  // deleteBox.forEach((del) => {
-  //   del.addEventListener("click", function (e) {
-  //     console.log("de");
-  //     deleteContainer.style.display = "flex";
-  //     overlay.style.display = "block";
-  //   });
+  writingSection.addEventListener("click", function (e) {
+    console.log(e.target);
 
-  //   deleteContainer.addEventListener("click", function (e) {
-  //     if (e.target.closest(".no-box")) {
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     } else if (e.target.closest(".yes-box")) {
-  //       const container = del.closest(".reply__box");
-  //       container.remove();
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     }
-  //   });
-  // });
+    if (e.target.closest(".send")) {
+      console.log(inputText.value);
+      // console.log(renderYous(inputText.value));
+      const writingSection = document.querySelector(".writing__section");
+      console.log(writingSection);
+      // writingSection.insertAdjacentElement("beforebegin", "writingSection");
+      renderYous(inputText.value);
+      inputText.value = "";
+    }
+  });
 };
 page();
