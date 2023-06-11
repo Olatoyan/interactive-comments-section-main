@@ -32,15 +32,17 @@ body {
 .container {
   display: grid;
   place-content: center;
+  /* padding: 5rem; */
 }
 
 .main {
-  margin-top: 5rem;
+  /* margin-top: 5rem; */
   max-width: 60rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
   position: relative;
+  padding: 3rem 1rem;
 }
 
 .comment__section {
@@ -129,7 +131,7 @@ body {
   align-items: center;
   gap: 1.6rem;
   padding: 2rem;
-  width: 50rem;
+  max-width: 50rem;
   border-radius: 1rem;
 }
 
@@ -219,13 +221,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
-  width: 35rem;
+  max-width: 35rem;
   padding: 2.2rem;
   background-color: #fff;
   z-index: 4;
   border-radius: 1rem;
 
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -273,6 +275,7 @@ body {
   align-items: flex-start;
   gap: 1.5rem;
   padding: 2rem;
+  width: 100%;
   background-color: #fff;
   display: none;
 }

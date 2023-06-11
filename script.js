@@ -7,26 +7,6 @@ const inputText = document.querySelector(".input__text");
 const deleteContainer = document.querySelector(".delete__container");
 const overlay = document.querySelector(".overlay");
 
-// numberBox.forEach((box) => {
-//   box.addEventListener("click", function (e) {
-//     const previousSibling = e.target.previousElementSibling;
-//     const nextSibling = e.target.nextElementSibling;
-
-//     // console.log(e.target);
-//     if (e.target.classList.contains("minus__icon")) {
-//       // console.log(previousSibling.textContent--);
-//       if (previousSibling.textContent === 0) {
-//         previousSibling.textContent = 0;
-//       } else if (previousSibling.textContent > 0) {
-//         previousSibling.textContent--;
-//       }
-//     } else if (e.target.classList.contains("plus__icon")) {
-//       console.log("plus");
-//       nextSibling.textContent++;
-//     }
-//   });
-// });
-
 const renderComment = function (data) {
   const html = `
       <div class="comment__box box">
@@ -106,14 +86,7 @@ const renderUserReply = function (data) {
                     />
                     <p class="delete__text">Delete</p>
                   </div>
-                  <div class="edit__box">
-                    <img
-                      src="images/icon-edit.svg"
-                      alt="edit img"
-                      class="edit__img"
-                    />
-                    <p class="edit__text">Edit</p>
-                  </div>
+                  
                 </div>
               </div>
               <p class="user__text">
@@ -236,10 +209,6 @@ const renderYou = function (data) {
   </div>
 </div>`;
 
-  // const commentBox = document.querySelectorAll(".comment__box");
-
-  // // commentBox.insertAdjacentHTML("afterend", html);
-  // commentBox.forEach((comment) => comment.insertAdjacentHTML("afterend", html));
   const replyBox = document.querySelector(".reply__input-box");
   const replys = replyBox.previousElementSibling;
 
@@ -248,11 +217,9 @@ const renderYou = function (data) {
 
   deleteBox.forEach((del) => {
     del.addEventListener("click", function (e) {
-      console.log("de");
       deleteContainer.style.display = "flex";
       overlay.style.display = "block";
       const container = del.closest(".reply__box");
-      console.log(container);
 
       const deleteContainerListener = function (e) {
         if (e.target.closest(".no-box")) {
@@ -269,26 +236,12 @@ const renderYou = function (data) {
     });
   });
   const replyComment = document.querySelectorAll(".reply__text__box");
-  console.log(replyComment);
   let activeReplyBox = null;
   const editBox = document.querySelectorAll(".edit__box");
   const handleReplySend = function (e) {
     const replyInput = document.querySelector(".reply__input");
-    console.log(replyInput);
     const replyBox = document.querySelector(".reply__input-box");
-    console.log(replyBox);
     const container = activeReplyBox.closest(".reply__box");
-    console.log(container);
-    // const editedText = replyInput.value.trim();
-    // console.log(editedText);
-
-    // if (editedText !== "") {
-    //   const userText = container.querySelector(".user__text");
-    //   userText.textContent = editedText;
-    // }
-
-    // replyBox.style.display = "none";
-    // activeReplyBox = null;
     if (container) {
       const editedText = replyInput.value.trim();
 
@@ -306,7 +259,6 @@ const renderYou = function (data) {
     edit.addEventListener("click", function (e) {
       const container = edit.closest(".reply__box");
       const text = container.querySelector(".user__text").textContent.trim();
-      console.log(text);
       container.style.display = "none";
 
       const replyBox = document.querySelector(".reply__input-box");
@@ -328,62 +280,17 @@ const renderYou = function (data) {
       const previousSibling = e.target.previousElementSibling;
       const nextSibling = e.target.nextElementSibling;
 
-      // console.log(e.target);
       if (e.target.classList.contains("minus__icon")) {
-        // console.log(previousSibling.textContent--);
         if (previousSibling.textContent === 0) {
           previousSibling.textContent = 0;
         } else if (previousSibling.textContent > 0) {
           previousSibling.textContent--;
         }
       } else if (e.target.classList.contains("plus__icon")) {
-        console.log("plus");
         nextSibling.textContent++;
       }
     });
   });
-
-  // const deleteBox = document.querySelectorAll(".delete__box");
-  // deleteBox.forEach((del) => {
-  //   const replyB = del.closest(".reply__box");
-
-  //   del.addEventListener("click", function (e) {
-  //     console.log("de");
-  //     deleteContainer.style.display = "flex";
-  //     overlay.style.display = "block";
-  //   });
-
-  //   deleteContainer.addEventListener("click", function (e) {
-  //     if (e.target.closest(".no-box")) {
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     } else if (e.target.closest(".yes-box")) {
-  //       const container = del.closest(".reply__box");
-  //       container.remove();
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     }
-  //   });
-  // });
-  // deleteBox.forEach((del) => {
-  //   del.addEventListener("click", function (e) {
-  //     console.log("de");
-  //     deleteContainer.style.display = "flex";
-  //     overlay.style.display = "block";
-  //   });
-
-  //   deleteContainer.addEventListener("click", function (e) {
-  //     if (e.target.closest(".no-box")) {
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     } else if (e.target.closest(".yes-box")) {
-  //       const container = del.closest(".reply__box");
-  //       container.remove();
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     }
-  //   });
-  // });
 };
 const renderYous = function (data) {
   const timestamp = new Date();
@@ -443,64 +350,22 @@ const renderYous = function (data) {
   </div>
 </div>`;
 
-  // const commentBox = document.querySelectorAll(".comment__box");
-
-  // // commentBox.insertAdjacentHTML("afterend", html);
-  // commentBox.forEach((comment) => comment.insertAdjacentHTML("afterend", html));
   const replyBox = document.querySelector(".reply__input-box");
   const replys = replyBox.previousElementSibling;
-  console.log(replys);
 
   const writingSection = document.querySelector(".writing__section");
 
-  // Insert the rendered content before the writing section
   writingSection.insertAdjacentHTML("beforebegin", html);
-  // replys.insertAdjacentHTML("beforebegin", html);
   const deleteBox = document.querySelectorAll(".delete__box");
 
-  deleteBox.forEach((del) => {
-    del.addEventListener("click", function (e) {
-      console.log("de");
-      deleteContainer.style.display = "flex";
-      overlay.style.display = "block";
-      const container = del.closest(".comment__box");
-      console.log(container);
-
-      const deleteContainerListener = function (e) {
-        if (e.target.closest(".no-box")) {
-          deleteContainer.style.display = "none";
-          overlay.style.display = "none";
-        } else if (e.target.closest(".yes-box")) {
-          container.remove();
-          deleteContainer.style.display = "none";
-          overlay.style.display = "none";
-        }
-      };
-
-      deleteContainer.addEventListener("click", deleteContainerListener);
-    });
-  });
   const replyComment = document.querySelectorAll(".reply__text__box");
-  console.log(replyComment);
   let activeReplyBox = null;
   const editBox = document.querySelectorAll(".edit__box");
   const handleReplySend = function (e) {
     const replyInput = document.querySelector(".reply__input");
-    console.log(replyInput);
     const replyBox = document.querySelector(".reply__input-box");
-    console.log(replyBox);
     const container = activeReplyBox.closest(".reply__box");
-    console.log(container);
-    // const editedText = replyInput.value.trim();
-    // console.log(editedText);
 
-    // if (editedText !== "") {
-    //   const userText = container.querySelector(".user__text");
-    //   userText.textContent = editedText;
-    // }
-
-    // replyBox.style.display = "none";
-    // activeReplyBox = null;
     if (container) {
       const editedText = replyInput.value.trim();
 
@@ -521,8 +386,8 @@ const renderYous = function (data) {
 
       const replyBox = document.querySelector(".reply__input-box");
       const replyInput = document.querySelector(".reply__input");
-      replyBox.style.display = "flex"; // Show the input box
-      container.style.display = "none"; // Hide the container
+      replyBox.style.display = "flex";
+      container.style.display = "none";
       replyInput.value = text;
       writingSection.style.display = "none";
 
@@ -533,37 +398,11 @@ const renderYous = function (data) {
     });
   });
 
-  // editBox.forEach((edit) => {
-  //   edit.addEventListener("click", function (e) {
-  //     const container = edit.closest(".comment__box");
-  //     console.log(container);
-  //     const text = container.querySelector(".user__text").textContent.trim();
-  //     console.log(text);
-  //     container.style.display = "none";
-
-  //     const replyBox = document.querySelector(".reply__input-box");
-  //     const replyInput = document.querySelector(".reply__input");
-
-  //     replyBox.style.display = "flex";
-  //     replyInput.value = text;
-
-  //     activeReplyBox = replyBox;
-  //     const containerr = document.querySelector(".comment__box");
-
-  //     containerr.insertAdjacentHTML("beforebegin", html);
-  //     containerr.remove();
-  //     replyBox.removeEventListener("click", handleReplySend);
-  //     replyBox.addEventListener("click", handleReplySend);
-  //   });
-  // });
-
   deleteBox.forEach((del) => {
     del.addEventListener("click", function (e) {
-      console.log("de");
       deleteContainer.style.display = "flex";
       overlay.style.display = "block";
       const container = del.closest(".comment__box");
-      console.log(container);
 
       const deleteContainerListener = function (e) {
         if (e.target.closest(".no-box")) {
@@ -587,77 +426,28 @@ const renderYous = function (data) {
       const previousSibling = e.target.previousElementSibling;
       const nextSibling = e.target.nextElementSibling;
 
-      // console.log(e.target);
       if (e.target.classList.contains("minus__icon")) {
-        // console.log(previousSibling.textContent--);
         if (previousSibling.textContent === 0) {
           previousSibling.textContent = 0;
         } else if (previousSibling.textContent > 0) {
           previousSibling.textContent--;
         }
       } else if (e.target.classList.contains("plus__icon")) {
-        console.log("plus");
         nextSibling.textContent++;
       }
     });
   });
-
-  // const deleteBox = document.querySelectorAll(".delete__box");
-  // deleteBox.forEach((del) => {
-  //   const replyB = del.closest(".reply__box");
-
-  //   del.addEventListener("click", function (e) {
-  //     console.log("de");
-  //     deleteContainer.style.display = "flex";
-  //     overlay.style.display = "block";
-  //   });
-
-  //   deleteContainer.addEventListener("click", function (e) {
-  //     if (e.target.closest(".no-box")) {
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     } else if (e.target.closest(".yes-box")) {
-  //       const container = del.closest(".reply__box");
-  //       container.remove();
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     }
-  //   });
-  // });
-  // deleteBox.forEach((del) => {
-  //   del.addEventListener("click", function (e) {
-  //     console.log("de");
-  //     deleteContainer.style.display = "flex";
-  //     overlay.style.display = "block";
-  //   });
-
-  //   deleteContainer.addEventListener("click", function (e) {
-  //     if (e.target.closest(".no-box")) {
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     } else if (e.target.closest(".yes-box")) {
-  //       const container = del.closest(".reply__box");
-  //       container.remove();
-  //       deleteContainer.style.display = "none";
-  //       overlay.style.display = "none";
-  //     }
-  //   });
-  // });
 };
 
 const page = async function () {
   const res = await fetch("data.json");
   const data = await res.json();
-  console.log(data);
 
   renderComment(data.comments[0]);
   renderComment(data.comments[1]);
   renderReply(data.comments[1].replies[0]);
   renderUserReply(data.comments[1].replies[1]);
-  // const replyComment = document.querySelectorAll(".reply__text__box");
-  // let activeReplyBox = null;
   const replyComment = document.querySelectorAll(".reply__text__box");
-  console.log(replyComment);
   let activeReplyBox = null;
 
   const handleReplySend = function (e) {
@@ -665,32 +455,25 @@ const page = async function () {
       const replyInput = document.querySelector(".reply__input");
       const replyBox = document.querySelector(".reply__input-box");
 
-      // const userName = reply.querySelector(".user__name").textContent;
-      console.log(replyInput.value);
       renderYou(replyInput.value);
-      // replyInput.value = `@${userName}`;
       replyBox.style.display = "none";
-      // activezzzz.style.display = "none";
       activeReplyBox = null;
-      // replyBox.removeEventListener("click", handleReplySend); // Remove the event listener after sending the reply
+      writingSection.style.display = "flex";
     }
   };
 
   replyComment.forEach((reply) => {
     reply.addEventListener("click", function (e) {
-      // writingSection.style.display = "flex";
       const replyBox = document.querySelector(".reply__input-box");
       const replys = reply.closest(".box");
       activeReplyBox = replyBox;
 
       replyBox.style.display = "flex";
       const replyInput = document.querySelector(".reply__input");
-      console.log(replys);
       replys.insertAdjacentElement("afterend", replyBox);
       const userName = replys.querySelector(".user__name").textContent;
       replyInput.textContent = `@${userName}`;
       replyInput.value = `@${userName}`;
-      console.log(replyBox);
 
       replyBox.removeEventListener("click", handleReplySend);
 
@@ -700,47 +483,6 @@ const page = async function () {
     });
   });
 
-  // const replyComment = document.querySelectorAll(".reply__text__box");
-  // let activeReplyBox = null;
-
-  // const handleReplySend = function (e) {
-  //   if (e.target.closest(".send")) {
-  //     const replyInput = document.querySelector(".reply__input");
-  //     const userName = activeReplyBox.querySelector(".user__name").textContent;
-  //     console.log(replyInput.value);
-  //     renderYou(replyInput.value);
-  //     replyInput.value = `@${userName}`;
-  //     // replyInput.style.display = "none";
-
-  //     activeReplyBox = null;
-  //     // replyBox.removeEventListener("click", handleReplySend); // Remove the event listener after sending the reply
-  //   }
-  // };
-
-  // replyComment.forEach((reply) => {
-  //   reply.addEventListener("click", function (e) {
-  //     const replys = reply.closest(".box");
-  //     const userName = replys.querySelector(".user__name").textContent;
-
-  //     if (activeReplyBox !== null && activeReplyBox !== replys) {
-  //       activeReplyBox.style.display = "none";
-  //       activeReplyBox = null;
-  //     }
-
-  //     if (activeReplyBox !== replys) {
-  //       const replyBox = document.querySelector(".reply__input-box");
-  //       activeReplyBox = replys;
-  //       replyBox.style.display = "flex";
-  //       const replyInput = document.querySelector(".reply__input");
-  //       replys.insertAdjacentElement("afterend", replyBox);
-  //       replyInput.textContent = `@${userName}`;
-
-  //       replyBox.removeEventListener("click", handleReplySend); // Remove previous event listener, if any
-  //       replyBox.addEventListener("click", handleReplySend);
-  //     }
-  //   });
-  // });
-
   const numberBox = document.querySelectorAll(".number__box");
 
   numberBox.forEach((box) => {
@@ -748,16 +490,13 @@ const page = async function () {
       const previousSibling = e.target.previousElementSibling;
       const nextSibling = e.target.nextElementSibling;
 
-      // console.log(e.target);
       if (e.target.classList.contains("minus__icon")) {
-        // console.log(previousSibling.textContent--);
         if (previousSibling.textContent === 0) {
           previousSibling.textContent = 0;
         } else if (previousSibling.textContent > 0) {
           previousSibling.textContent--;
         }
       } else if (e.target.classList.contains("plus__icon")) {
-        console.log("plus");
         nextSibling.textContent++;
       }
     });
@@ -766,11 +505,9 @@ const page = async function () {
 
   deleteBox.forEach((del) => {
     del.addEventListener("click", function (e) {
-      console.log("de");
       deleteContainer.style.display = "flex";
       overlay.style.display = "block";
       const container = del.closest(".reply__box");
-      console.log(container);
 
       const deleteContainerListener = function (e) {
         if (e.target.closest(".no-box")) {
@@ -790,17 +527,31 @@ const page = async function () {
   const writingSection = document.querySelector(".writing__section");
 
   writingSection.addEventListener("click", function (e) {
-    console.log(e.target);
-
     if (e.target.closest(".send")) {
-      console.log(inputText.value);
-      // console.log(renderYous(inputText.value));
       const writingSection = document.querySelector(".writing__section");
-      console.log(writingSection);
-      // writingSection.insertAdjacentElement("beforebegin", "writingSection");
       renderYous(inputText.value);
       inputText.value = "";
     }
+  });
+  const editBox = document.querySelectorAll(".edit__box");
+
+  editBox.forEach((edit) => {
+    edit.addEventListener("click", function (e) {
+      const container = edit.closest(".reply__box");
+      const text = container.querySelector(".user__text").textContent.trim();
+
+      const replyBox = document.querySelector(".reply__input-box");
+      const replyInput = document.querySelector(".reply__input");
+      replyBox.style.display = "flex";
+      container.style.display = "none";
+      replyInput.value = text;
+      writingSection.style.display = "none";
+
+      activeReplyBox = replyBox;
+
+      replyBox.removeEventListener("click", handleReplySend);
+      replyBox.addEventListener("click", handleReplySend);
+    });
   });
 };
 page();
